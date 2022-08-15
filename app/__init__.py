@@ -41,15 +41,19 @@ def ordenes():
     try:
         conexion = obtener_bd()
         cursor = conexion.cursor()
-        sentencia = 'SELECT * FROM tipo_usuario'
+        sentencia = 'SELECT * FROM orden'
         cursor.execute(sentencia)
         registros = cursor.fetchall()
         print(registros)
-        cursor.close()
-        conexion.close()
-        return 'ok'
+        data = {
+            "ordenes": registros
+        }
+        return render_template('ordenes.html', data=data)
     except Exception as ex:
         raise Exception(ex)
+    finally:
+        conexion.close()
+        cursor.close()
 
 
 def pagina_no_encontrada(error):
