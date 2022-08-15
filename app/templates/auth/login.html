@@ -1,0 +1,38 @@
+{%extends './base.html'%}
+
+{%block title%}
+Inicip de sesion
+{%endblock%}
+{%block css%}
+<link rel="stylesheet" href="{{url_for('static',filename='./css/login.css')}}">
+{%endblock%}
+
+{%block body%}
+<form class="form-signin" action="/login" method="post">
+    <input type="hidden" name="csrf_token" value="{{csrf_token()}}">
+    <div class="text-center mb-4">
+        <img class="mb-4" src="{{url_for('static',filename='img/logo_molva.svg')}}" alt="" width="307" height="87">
+        <h1 class="h3 mb-3 font-weight-normal">Inicio de Sesión</h1>
+        <p>Bienvenido al apartado de Inicio de Sesion de Malvoo <a class="titulo_amarillo">Por favor autentiquese para
+                continuar</a></p>
+    </div>
+
+    <div class="form-label-group">
+        <input type="text" id="usuario" class="form-control" placeholder="Usuario" required autofocus name="usuario"
+            minlength="4">
+        <label for="usuario">Nombre del usuario</label>
+    </div>
+    <div class="form-label-group">
+        <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+        <label for="password">Contraseña</label>
+    </div>
+
+
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Iniciar Sesión</button>
+    <p class="mt-5 mb-3 text-muted text-center">&copy; 2022 - MALVOO</p>
+</form>
+{%endblock%}
+
+{%block js%}
+<script src="{{url_for('static',filename='js/login.js')}}"></script>
+{%endblock%}
