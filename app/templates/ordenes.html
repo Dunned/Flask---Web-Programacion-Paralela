@@ -10,12 +10,15 @@
 
 <body>
     <table>
-        {%for l in data.ordenes%}
+        {%for item in data['productos']%}
         <tr>
-            <td>{{l[0]}}</td>
-            <td>{{l[1]}}</td>
-            <td>{{l[2]}}</td>
-            <td>{{l[3]}}</td>
+            <td>{{item.sku}}</td>
+            <td>{{item.nombre_producto}}</td>
+            <td>{{item.descripcion_producto}}</td>
+            <td>{{item.costo_producto}}</td>
+            <td>{{item.precio_producto}}</td>
+            <td>{{item.marca.nombre_marca}}</td>
+            <td>{{item.marca.descripcion_marca}}</td>
         </tr>
         {%endfor%}
     </table>

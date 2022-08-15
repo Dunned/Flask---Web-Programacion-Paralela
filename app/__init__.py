@@ -3,7 +3,13 @@ from flask_wtf.csrf import CSRFProtect
 import psycopg2 as bd
 
 
-def obtener_bd():
+from .models.ModeloProducto import ModeloProducto
+from .models.ModeloUsuario import ModeloUsuario
+
+from .models.entities.Usuario import Usuario
+
+
+def obtener_conexion():
     conexion = bd.connect(user='postgres', password='eduardojr',
                           database='bd_malmo')
     return conexion
@@ -19,16 +25,21 @@ def index():
     return render_template('index.html')
 
 
+@app.route('/password/<password>')
+def generar_password(password):
+    encriptado = generate_password_hash(password)
+    valor = check_password_hash(encriptado, password)
+    return f'Encriptado: {encriptado}, coiciende: {valor}'
+
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    '''
-    print(request.method)
-    print(request.form('usuario'))
-    print(request.form('password'))
-    '''
     if request.method == 'POST':
-        if (request.form['usuario'] == 'eduardo' and
-           request.form['password'] == 'eduardo'):
+        usuario = Usuario(
+            None, request.form['usuario'], request.form['password'], None)
+
+        usuario_logueado = ModeloUsuario.login(obtener_conexion(), usuario)
+        if usuario_logueado != None:
             return redirect(url_for('index'))
         else:
             return render_template('auth/login.html')
@@ -39,21 +50,14 @@ def login():
 @app.route('/ordenes')
 def ordenes():
     try:
-        conexion = obtener_bd()
-        cursor = conexion.cursor()
-        sentencia = 'SELECT * FROM orden'
-        cursor.execute(sentencia)
-        registros = cursor.fetchall()
-        print(registros)
+        productos = ModeloProducto.listar_ordenes(obtener_conexion())
         data = {
-            "ordenes": registros
+            'productos': productos
         }
+        print(productos)
         return render_template('ordenes.html', data=data)
-    except Exception as ex:
-        raise Exception(ex)
-    finally:
-        conexion.close()
-        cursor.close()
+    except Exception as e:
+        print(e)
 
 
 def pagina_no_encontrada(error):
