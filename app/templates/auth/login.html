@@ -29,6 +29,34 @@ Inicip de sesion
 
 
     <button class="btn btn-lg btn-primary btn-block" type="submit">Iniciar Sesión</button>
+
+    {% with messages = get_flashed_messages(with_categories=True) %}
+
+    {%if messages%}
+    <br>
+
+    {%for category,message in messages%}
+
+    {%if category == 'warning'%}
+
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong style="text-align: center;">{{message}}</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {%else%}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong style="text-align: center;">{{message}}</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    {%endif%}
+    {%endfor%}
+    {%endif%}
+    {%endwith%}
     <p class="mt-5 mb-3 text-muted text-center">&copy; 2022 - MALVOO</p>
 </form>
 {%endblock%}
