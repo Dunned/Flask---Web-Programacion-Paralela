@@ -1,27 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends './body.html' %}
+{% block title %} Listado de Productos {%endblock%}
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=h1, initial-scale=1.0">
-    <title>Document</title>
-</head>
 
-<body>
-    <table>
-        {%for item in data['productos']%}
-        <tr>
-            <td>{{item.sku}}</td>
-            <td>{{item.nombre_producto}}</td>
-            <td>{{item.descripcion_producto}}</td>
-            <td>{{item.costo_producto}}</td>
-            <td>{{item.precio_producto}}</td>
-            <td>{{item.marca.nombre_marca}}</td>
-            <td>{{item.marca.descripcion_marca}}</td>
-        </tr>
-        {%endfor%}
-    </table>
-</body>
+{%block container%}
+<div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <h1>{{data.Titulo}}</h1>
+    </div>
+</div>
+<hr>
 
-</html>
+<div class="row">
+    {%for item in data['productos'] %}
+    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+        <div class="card">
+            <img class="card-img-top" src="https://www.gamecored.com/wp-content/uploads/2020/01/C-1-810x400.jpg"
+                alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">{{item.nombre_producto}}</h5>
+                <p class="card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorum distinctio,
+                    voluptatum laboriosam in harum accusamus error sint beatae ullam ipsa consequuntur commodi quia
+                    quaerat saepe ipsam animi et fugit facilis.</p>
+                <a href="{{url_for('editar')}}" class="btn btn-primary">Editar Producto</a>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">Modificado hace 3 dias</small>
+            </div>
+        </div>
+        <br>
+    </div>
+
+    {%endfor%}
+</div>
+
+{%endblock%}

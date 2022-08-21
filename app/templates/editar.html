@@ -1,0 +1,41 @@
+{% extends './body.html' %}
+{% block title %} Listado de Productos {%endblock%}
+
+{%block container%}
+<div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <h1>{{data.Titulo}}</h1>
+    </div>
+</div>
+<hr>
+
+<form>
+    <div class="form-group">
+        <label for="exampleInputEmail1">SKU DEL PRODUCTO</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+            placeholder="Ingresar SKU" value="51513">
+        <small id="emailHelp" class="form-text text-muted">Ingresa un SKU VALIDO</small>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Nombre del Producto</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+            placeholder="Ingresar Nombre" value="IPHONE 14">
+        <small id="emailHelp" class="form-text text-muted">Ingresa un Nombre VALIDO</small>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Precio del Producto</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+            placeholder="Ingresar Precio" value="9999.32">
+        <small id="emailHelp" class="form-text text-muted">Ingresa un Precio VALIDO</small>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Foto DEL PRODUCTO</label>
+        <input type="file" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+            placeholder="Ingresar SKU">
+    </div>
+
+    <a type="submit" class="btn btn-primary editar-producto" href="{{url_for('confirmar_edicion')}}">Actualizar
+        Producto</a>
+</form>
+
+{%endblock%}

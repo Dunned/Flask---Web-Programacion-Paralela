@@ -1,9 +1,12 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_wtf.csrf import CSRFProtect
 import psycopg2 as bd
-from flask_login import LoginManager, login_user, logout_user, login_required
+from flask_login import LoginManager, login_user, logout_user, login_required, current_user
+from flask_mail import Mail
+
 
 from .consts import *
+from .emails import confirmacion_email
 
 from .models.ModeloProducto import ModeloProducto
 from .models.ModeloUsuario import ModeloUsuario
@@ -22,6 +25,7 @@ app = Flask(__name__)
 cstf = CSRFProtect()
 
 login_manager_app = LoginManager(app)
+mail = Mail()
 
 
 @login_manager_app.user_loader
@@ -32,7 +36,15 @@ def load_user(id_usuario):
 @app.route('/')
 @login_required
 def index():
-    return render_template('index.html')
+    if current_user.is_authenticated:
+        ordenes = []
+        data = {
+            'Titulo': 'Ordenes Realizadas en los ultimos dias',
+            'ordenes_hechas': ordenes
+        }
+        return render_template('index.html', data=data)
+    else:
+        return redirect(url_for('login'))
 
 
 @app.route('/password/<password>')
@@ -51,7 +63,6 @@ def login():
         usuario_logueado = ModeloUsuario.login(obtener_conexion(), usuario)
         if usuario_logueado != None:
             login_user(usuario_logueado)
-            flash(MENSAJE_BIENVENIDA, 'success')
             return redirect(url_for('index'))
         else:
             flash(LOGIN_CREDENCIALES_INVALIDAS, 'warning')
@@ -73,12 +84,37 @@ def ordenes():
     try:
         productos = ModeloProducto.listar_ordenes(obtener_conexion())
         data = {
+            'Titulo': 'Listado de Productos',
             'productos': productos
         }
         print(productos)
         return render_template('ordenes.html', data=data)
     except Exception as e:
         print(e)
+
+
+@app.route('/editar')
+@login_required
+def editar():
+    try:
+        data = {
+            'Titulo': 'Editar Producto',
+            'productos': None
+        }
+        return render_template('editar.html', data=data)
+    except Exception as e:
+        print(e)
+
+
+@app.route('/confirmar_edicion')
+@login_required
+def confirmar_edicion():
+    try:
+        confirmacion_email(app, mail, None, None)
+        return redirect(url_for('index'))
+    except Exception as e:
+        flash('SE EDITO PRODUCTO', 'success')
+        return redirect(url_for('index'))
 
 
 def pagina_no_encontrada(error):
@@ -92,6 +128,7 @@ def pagina_no_autorizada(error):
 def inicializar_app(config):
     app.config.from_object(config)
     cstf.init_app(app)
+    mail.init_app(app)
     app.register_error_handler(404, pagina_no_encontrada)
     app.register_error_handler(401, pagina_no_autorizada)
     return app

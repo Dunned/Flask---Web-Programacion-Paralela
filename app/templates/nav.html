@@ -1,21 +1,24 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light ">
     <a class="navbar-brand" href="{{url_for('index')}}">DashBoard MOOLVA</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
         aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="{{url_for('index')}}">Index <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="{{url_for('ordenes')}}">Productos Registrados <span
+                        class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
                 <a class="nav-link" href="{{url_for('logout')}}">Cerrar Sesion <span
                         class="sr-only">(current)</span></a>
             </li>
-            <!-- <li class="nav-item">
-                <a class="nav-link" href="#">Estadisticas</a>
-            </li> -->
         </ul>
+        <span class="navbar-text">
+            <strong>
+                {{current_user.nombre_usuario}} - ({{current_user.tipo_usuario.nombre_tipo_usuario}})
+            </strong>
+        </span>
     </div>
 </nav>
