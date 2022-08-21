@@ -11,7 +11,7 @@ class ModeloUsuario():
             cursor = conexion.cursor()
 
             sql = f"""SELECT id_usuario,nombre_usuario,contraseña 
-            FROM usuario where nombre_usuario = '{usuario.nombre_usuario}' """
+            FROM usuario where nombre_usuario = '{usuario.nombre_usuario}' and tipo_usuario = 1 """
             cursor.execute(sql)
             data = cursor.fetchone()
             if data != None:
@@ -38,7 +38,7 @@ class ModeloUsuario():
             FROM usuario us
             LEFT JOIN tipo_usuario tp
             ON us.tipo_usuario = tp.id_tipo_usuario
-            where us.id_usuario = {id} """
+            where us.id_usuario = {id} and tipo_usuario = 1 """
             cursor.execute(sql)
             data = cursor.fetchone()
             print('gaaa2')
