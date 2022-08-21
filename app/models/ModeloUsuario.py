@@ -10,15 +10,17 @@ class ModeloUsuario():
         try:
             cursor = conexion.cursor()
 
-            sql = f"""SELECT id_usuario,nombre_usuario,contraseña 
-            FROM usuario where nombre_usuario = '{usuario.nombre_usuario}' and tipo_usuario = 1 """
+            sql = f"""SELECT id_usuario,username,contraseña,nombre_usuario,foto_usuario
+            FROM usuario where username = '{usuario.username}' and tipo_usuario = 1 """
             cursor.execute(sql)
             data = cursor.fetchone()
             if data != None:
                 coincide = Usuario.verificar_password(
                     data[2], usuario.contrasenia)
                 if coincide:
-                    usuario_logueado = Usuario(data[0], data[1], None, None)
+                    usuario_logueado = Usuario(
+                        id_usuario=data[0], username=data[1], contrasenia=None, tipo_usuario=None,
+                        nombre_usuario=data[3], foto_usuario=data[4])
                     return usuario_logueado
                 else:
                     return None
@@ -34,17 +36,17 @@ class ModeloUsuario():
         try:
             cursor = conexion.cursor()
 
-            sql = f"""SELECT us.id_usuario,us.nombre_usuario,tp.id_tipo_usuario,tp.nombre_tipo_usuario
+            sql = f"""SELECT us.id_usuario,us.username,us.nombre_usuario,us.foto_usuario,
+            tp.id_tipo_usuario,tp.nombre_tipo_usuario
             FROM usuario us
             LEFT JOIN tipo_usuario tp
             ON us.tipo_usuario = tp.id_tipo_usuario
             where us.id_usuario = {id} and tipo_usuario = 1 """
             cursor.execute(sql)
             data = cursor.fetchone()
-            print('gaaa2')
-            tipo_usuario = TipoUsuario(data[2], data[3])
-            usuario_logueado = Usuario(data[0], data[1], None, tipo_usuario)
-            print('gaaa2')
+            tipo_usuario = TipoUsuario(data[4], data[5])
+            usuario_logueado = Usuario(
+                data[0], data[1], None, tipo_usuario, data[2], data[3])
             return usuario_logueado
         except Exception as ex:
             raise Exception(ex)

@@ -1,3 +1,5 @@
+from __future__ import print_function
+from tkinter.messagebox import NO
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_wtf.csrf import CSRFProtect
 import psycopg2 as bd
@@ -58,9 +60,10 @@ def generar_password(password):
 def login():
     if request.method == 'POST':
         usuario = Usuario(
-            None, request.form['usuario'], request.form['password'], None)
+            None, request.form['usuario'], request.form['password'], None, None, None)
 
         usuario_logueado = ModeloUsuario.login(obtener_conexion(), usuario)
+        print(usuario_logueado.nombre_usuario, usuario.foto_usuario)
         if usuario_logueado != None:
             login_user(usuario_logueado)
             return redirect(url_for('index'))
