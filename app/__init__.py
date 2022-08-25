@@ -84,16 +84,16 @@ def logout():
 @app.route('/ordenes')
 @login_required
 def ordenes():
-    try:
-        productos = ModeloProducto.listar_ordenes(obtener_conexion())
-        data = {
-            'Titulo': 'Listado de Productos',
-            'productos': productos
-        }
-        print(productos)
-        return render_template('ordenes.html', data=data)
-    except Exception as e:
-        print(e)
+    # try:
+    #     productos = ModeloProducto.listar_ordenes(obtener_conexion())
+    #     data = {
+    #         'Titulo': 'Listado de Productos',
+    #         'productos': productos
+    #     }
+    #     print(productos)
+    return render_template('pages/ordenes.html')
+    # except Exception as e:
+    print(e)
 
 
 @app.route('/editar')
