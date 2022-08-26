@@ -1,5 +1,5 @@
 {% extends './base.html' %}
-{% block title %} Listado de Ordenes {%endblock%}
+{% block title %} Listado de Productos {%endblock%}
 {%block css%}
 <!-- DataTables -->
 <link rel="stylesheet"
@@ -14,8 +14,8 @@
     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <!-- Add icons to the links using the .nav-icon class
  with font-awesome or any other icon font library -->
-        <li class="nav-item menu-open menu-is-opening">
-            <a href="#" class="nav-link active">
+        <li class="nav-item">
+            <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-shopping-cart"></i>
                 <p>
                     Ordenes
@@ -24,7 +24,7 @@
             </a>
             <ul class="nav nav-treeview">
                 <li class="nav-item">
-                    <a href="{{url_for('ordenes')}}" class="nav-link active">
+                    <a href="{{url_for('ordenes')}}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Ver Ordenes</p>
                     </a>
@@ -37,9 +37,10 @@
                 </li>
             </ul>
         </li>
-        <li class="nav-item">
-            <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-mobile"></i>
+
+        <li class="nav-item menu-open menu-is-opening">
+            <a href="#" class="nav-link nav-link active"">
+                <i class=" nav-icon fas fa-mobile"></i>
                 <p>
                     Productos
                     <i class="fas fa-angle-left right"></i>
@@ -47,7 +48,7 @@
             </a>
             <ul class="nav nav-treeview">
                 <li class="nav-item">
-                    <a href="{{url_for('productos')}}" class="nav-link">
+                    <a href="{{url_for('productos')}}" class="nav-link active">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Ver Productos</p>
                     </a>
@@ -130,31 +131,17 @@
                         <h3 class="card-title">Listado de Ordenes</h3>
                     </div>
                     <!-- /.card-header -->
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src="..." alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                                of the card's content.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
                     <div class="card-body">
-                        <table id="example1" class="table table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Id de la Orden</th>
-                                    <th>Fecha de la Orden</th>
-                                    <th>Tipo de Delivery</th>
-                                    <th>Id_Usuario</th>
-                                    <th>Ticket Full Price</th>
-                                    <th>Descuento Aplicado</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {%for orden in data['ordenes']%}
-                                <tr>
-                                    <td>{{orden.id_orden}}</td>
-                                    <td>{{orden.fecha_orden}}</td>
-                                    <td>{{orden.tipo_delivery}}</td>
-                                    <td>{{orden.id_usuario}}</td>
-                                    <td>{{orden.ticket_full_price}}</td>
-                                    <td>{{orden.descuento_aplicado}}</td>
-                                </tr>
-                                {%endfor%}
-                            </tbody>
-                        </table>
+
                     </div>
                     <!-- /.card-body -->
                 </div>

@@ -10,9 +10,10 @@ from flask_mail import Mail
 from .consts import *
 from .emails import confirmacion_email
 
+# IMPORTANCION DE MODELOS PARA RECUPERAR DATA
 from .models.ModeloProducto import ModeloProducto
 from .models.ModeloUsuario import ModeloUsuario
-
+from .models.ModeloOrden import ModeloOrden
 from .models.entities.Usuario import Usuario
 
 
@@ -44,6 +45,7 @@ def index():
             'Titulo': 'Ordenes Realizadas en los ultimos dias',
             'ordenes_hechas': ordenes
         }
+        flash(LOGIN_CREDENCIALES_INVALIDAS, 'warning')
         return render_template('index.html', data=data)
     else:
         return redirect(url_for('login'))
@@ -84,16 +86,27 @@ def logout():
 @app.route('/ordenes')
 @login_required
 def ordenes():
-    # try:
-    #     productos = ModeloProducto.listar_ordenes(obtener_conexion())
-    #     data = {
-    #         'Titulo': 'Listado de Productos',
-    #         'productos': productos
-    #     }
-    #     print(productos)
-    return render_template('pages/ordenes.html')
-    # except Exception as e:
-    print(e)
+    try:
+        ordenes = ModeloOrden.listar_ordenes(obtener_conexion())
+        data = {
+            'ordenes': ordenes
+        }
+        return render_template('pages/ordenes.html', data=data)
+    except Exception as e:
+        print(e)
+
+
+@app.route('/productos')
+@login_required
+def productos():
+    try:
+        # ordenes = ModeloOrden.listar_ordenes(obtener_conexion())
+        # data = {
+        #     'ordenes': ordenes
+        # }
+        return render_template('pages/productos.html')
+    except Exception as e:
+        print(e)
 
 
 @app.route('/editar')
