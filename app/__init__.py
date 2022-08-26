@@ -100,11 +100,11 @@ def ordenes():
 @login_required
 def productos():
     try:
-        # ordenes = ModeloOrden.listar_ordenes(obtener_conexion())
-        # data = {
-        #     'ordenes': ordenes
-        # }
-        return render_template('pages/productos.html')
+        productos = ModeloProducto.listarProductos(obtener_conexion())
+        data = {
+            'productos': productos
+        }
+        return render_template('pages/productos.html', data=data)
     except Exception as e:
         print(e)
 

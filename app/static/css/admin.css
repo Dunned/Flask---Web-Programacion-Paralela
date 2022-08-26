@@ -1,0 +1,28 @@
+:root {
+  --color_negro_claro: #151f21;
+  --color_principal: #ffcb02;
+}
+
+[class*="sidebar-dark-"] {
+  background-color: var(--color_negro_claro);
+}
+
+.sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link.active,
+.sidebar-light-primary .nav-sidebar > .nav-item > .nav-link.active {
+  background-color: var(--color_principal);
+  color: black;
+}
+
+.contenedor_logo {
+  display: flex;
+  align-items: center;
+  gap: 2.8rem;
+}
+
+.palabra_logo {
+  font-size: 1.6rem;
+}
+
+.logomalmo {
+  color: var(--color_principal);
+}

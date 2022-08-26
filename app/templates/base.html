@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{url_for('static',filename='admin/plugins/fontawesome-free/css/all.min.css')}}">
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="{{url_for('static',filename='admin/dist/css/adminlte.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/admin.css')}}">
     {%block css%} {%endblock%}
 </head>
 
@@ -51,9 +52,11 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="{{url_for('index')}}" class="brand-link">
+            <a href="{{url_for('index')}}" class="brand-link contenedor_logo">
                 <img src="{{url_for('static',filename='img/logo_molva.svg')}}" alt="AdminLTE Logo" class="brand-image">
-                <span class="brand-text font-weight-light"><strong>Admin</strong></span>
+                <span class="brand-text font-weight-light palabra_logo">
+                    <strong>MAL<span class="logomalmo">MO</span></strong>
+                </span>
             </a>
 
             <!-- Sidebar -->
