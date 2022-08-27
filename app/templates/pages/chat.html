@@ -1,0 +1,213 @@
+{% extends './base.html' %}
+{% block title %} Listado de Ordenes {%endblock%}
+{%block css%}
+<!-- DataTables -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.8/socket.io.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+{%endblock%}
+{%block menuizquierdo%}
+<nav class="mt-2">
+    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <!-- Add icons to the links using the .nav-icon class
+ with font-awesome or any other icon font library -->
+        <li class="nav-item">
+            <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-shopping-cart"></i>
+                <p>
+                    Ordenes
+                    <i class="fas fa-angle-left right"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="{{url_for('ordenes')}}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Ver Ordenes</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Cancelar Ordenes</p>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item">
+            <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-mobile"></i>
+                <p>
+                    Productos
+                    <i class="fas fa-angle-left right"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="{{url_for('productos')}}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Ver Productos</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Registrar Productos</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Editar Productos</p>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="nav-item">
+            <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-users"></i>
+                <p>
+                    Clientes
+                    <i class="fas fa-angle-left right"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="{{url_for('clientes')}}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Ver Clientes</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Editar Clientes</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Eliminar Clientes</p>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="nav-header">Recursos de Malmo</li>
+        <li class="nav-item active">
+            <a href="#" class="nav-link active">
+                <i class="nav-icon fas fa-comment-alt"></i>
+                <p>
+                    Chat Interno
+                    <span class="badge badge-info right">2</span>
+                </p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="#" class="nav-link">
+                <i class="nav-icon far fa-image"></i>
+                <p>
+                    Actualizar Recursos Multimedia
+                </p>
+            </a>
+        </li>
+</nav>
+{%endblock%}
+
+{%block body%}
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <script type="text/javascript">
+            $(document).ready(function () {
+
+                var socket = io.connect('http://127.0.0.1:5000');
+
+                // socket.on('connect', function () {
+                //     socket.send('Usuario Conectado');
+                // });
+
+                socket.on('message', function (usuario) {
+                    $("#messages").append('<li>' + '<img src="' + usuario.foto + '" alt="">' + '<span>' + usuario.nombre + ': ' + '</span>' + usuario.mensaje + '</li>' + '<br>');
+                    console.log(usuario.foto);
+                });
+
+                $('#sendbutton').on('click', function () {
+                    socket.send($('#myMessage').val());
+                    $('#myMessage').val('');
+                });
+
+            });
+        </script>
+
+
+        <div class="card card-danger direct-chat direct-chat-danger">
+            <div class="card-header">
+                <h3 class="card-title">Zona de Chat para colaboradores</h3>
+
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <div class="direct-chat-messages">
+                    <ul id="messages">
+
+                    </ul>
+                </div>
+            </div>
+            <!-- /.card-body -->
+            <div class="card-footer">
+                <form action="" method="">
+                    <div class="input-group">
+                        <input type="text" id="myMessage" name="message" placeholder="Escribir mensaje ..."
+                            class="form-control">
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-primary" id="sendbutton">Enviar</button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+            <!-- /.card-footer-->
+        </div>
+        <!--/.direct-chat -->
+    </div>
+    <!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+
+{%endblock%}
+
+{%block js%}
+<script src="{{url_for('static',filename='admin/plugins/datatables/jquery.dataTables.min.js')}}"></script>
+<script src="{{url_for('static',filename='admin/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+<script
+    src="{{url_for('static',filename='admin/plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
+<script
+    src="{{url_for('static',filename='admin/plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
+<script src="{{url_for('static',filename='admin/plugins/datatables-buttons/js/dataTables.buttons.min.js')}}"></script>
+<script src="{{url_for('static',filename='admin/plugins/datatables-buttons/js/buttons.bootstrap4.min.js')}}"></script>
+<script src="{{url_for('static',filename='admin/plugins/jszip/jszip.min.js')}}"></script>
+<script src="{{url_for('static',filename='admin/plugins/pdfmake/pdfmake.min.js')}}"></script>
+<script src="{{url_for('static',filename='admin/plugins/pdfmake/vfs_fonts.js')}}"></script>
+<script src="{{url_for('static',filename='admin/plugins/datatables-buttons/js/buttons.html5.min.js')}}"></script>
+<script src="{{url_for('static',filename='admin/plugins/datatables-buttons/js/buttons.print.min.js')}}"></script>
+<script src="{{url_for('static',filename='admin/plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
+
+<script>
+    $(function () {
+        $("#example1").DataTable({
+            "responsive": true, "lengthChange": false, "autoWidth": false,
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+        });
+    });
+</script>
+{%endblock%}

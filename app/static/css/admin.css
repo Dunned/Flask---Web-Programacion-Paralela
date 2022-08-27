@@ -37,3 +37,39 @@
   height: 60px;
   max-width: 100%;
 }
+.card-danger:not(.card-outline) > .card-header {
+  background-color: var(--color_principal);
+  color: black;
+}
+
+.btn-primary {
+  background-color: #151f21;
+}
+
+#messages img {
+  height: 80px;
+  width: 60px;
+  border-radius: 5px;
+  margin-right: 20px;
+}
+
+#messages li {
+  height: 80px;
+}
+
+#messages span {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+ul {
+  list-style: none;
+}
+
+div .card.card-danger.direct-chat.direct-chat-danger {
+  height: 600px;
+}
+
+div .direct-chat-messages {
+  height: 100%;
+}

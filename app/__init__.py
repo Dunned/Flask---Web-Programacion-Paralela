@@ -1,4 +1,5 @@
 from __future__ import print_function
+from socket import socket
 from tkinter.messagebox import NO
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_wtf.csrf import CSRFProtect
@@ -6,6 +7,8 @@ import psycopg2 as bd
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from flask_mail import Mail
 
+# SOCKET IO
+from flask_socketio import SocketIO, send
 
 from .consts import *
 from .emails import confirmacion_email
@@ -24,7 +27,7 @@ def obtener_conexion():
 
 
 app = Flask(__name__)
-
+socketio = SocketIO(app, cors_allowed_origins='*')
 cstf = CSRFProtect()
 
 login_manager_app = LoginManager(app)
@@ -145,6 +148,33 @@ def enviar_email():
         return redirect(url_for('index'))
 
 
+@socketio.on("message")
+def sendMessage(message):
+    send(message, broadcast=True)
+    # send() function will emit a message vent by default
+
+
+@app.route('/chat')
+@login_required
+def chat():
+    return render_template('pages/chat.html')
+
+
+@socketio.on('message')
+def handleMessage(msg):
+    if msg == 'Usuario Conectado':
+        send(
+            f'El usuario {current_user.nombre_usuario.title()}, se ha conectado!')
+    #print('Message: ' + msg)
+    else:
+        usuario = {
+            'nombre': current_user.nombre_usuario.title(),
+            'foto': current_user.foto_usuario,
+            'mensaje': msg
+        }
+        send(usuario, broadcast=True)
+
+
 def pagina_no_encontrada(error):
     return render_template('errores/404.html'), 404
 
@@ -157,6 +187,7 @@ def inicializar_app(config):
     app.config.from_object(config)
     cstf.init_app(app)
     mail.init_app(app)
+    socketio.run(app)
     app.register_error_handler(404, pagina_no_encontrada)
     app.register_error_handler(401, pagina_no_autorizada)
     return app
