@@ -135,14 +135,13 @@ def editar():
         print(e)
 
 
-@app.route('/confirmar_edicion')
+@app.route('/enviar_email')
 @login_required
-def confirmar_edicion():
+def enviar_email():
     try:
         confirmacion_email(app, mail, None, None)
         return redirect(url_for('index'))
     except Exception as e:
-        flash('SE EDITO PRODUCTO', 'success')
         return redirect(url_for('index'))
 
 
