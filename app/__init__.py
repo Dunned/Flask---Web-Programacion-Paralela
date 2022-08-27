@@ -109,6 +109,19 @@ def productos():
         print(e)
 
 
+@app.route('/clientes')
+@login_required
+def clientes():
+    try:
+        usuarios = ModeloUsuario.obtenerUsuarios(obtener_conexion())
+        data = {
+            'usuarios': usuarios
+        }
+        return render_template('pages/clientes.html', data=data)
+    except Exception as e:
+        print(e)
+
+
 @app.route('/editar')
 @login_required
 def editar():

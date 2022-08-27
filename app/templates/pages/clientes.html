@@ -1,5 +1,5 @@
 {% extends './base.html' %}
-{% block title %} Listado de Productos {%endblock%}
+{% block title %} Listado de Ordenes {%endblock%}
 {%block css%}
 <!-- DataTables -->
 <link rel="stylesheet"
@@ -37,10 +37,9 @@
                 </li>
             </ul>
         </li>
-
-        <li class="nav-item menu-open menu-is-opening">
-            <a href="#" class="nav-link nav-link active"">
-                <i class=" nav-icon fas fa-mobile"></i>
+        <li class="nav-item">
+            <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-mobile"></i>
                 <p>
                     Productos
                     <i class="fas fa-angle-left right"></i>
@@ -48,7 +47,7 @@
             </a>
             <ul class="nav nav-treeview">
                 <li class="nav-item">
-                    <a href="{{url_for('productos')}}" class="nav-link active">
+                    <a href="{{url_for('productos')}}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Ver Productos</p>
                     </a>
@@ -68,8 +67,8 @@
             </ul>
         </li>
 
-        <li class="nav-item">
-            <a href="#" class="nav-link">
+        <li class="nav-item menu-open menu-is-opening">
+            <a href="#" class="nav-link active">
                 <i class="nav-icon fas fa-users"></i>
                 <p>
                     Clientes
@@ -78,7 +77,7 @@
             </a>
             <ul class="nav nav-treeview">
                 <li class="nav-item">
-                    <a href="{{url_for('clientes')}}" class="nav-link">
+                    <a href="#" class="nav-link active">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Ver Clientes</p>
                     </a>
@@ -121,73 +120,51 @@
 
 {%block body%}
 
+<!-- Main content -->
 <section class="content">
-
-    <!-- Default box -->
-    <div class="card card-solid">
-        <div class="card-body pb-0">
-            <div class="row">
-                {%for producto in data['productos']%}
-                <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column">
-                    <div class="card bg-light d-flex flex-fill">
-                        <div class="card-header text-muted border-bottom-0">
-                            {{producto.marca.nombre_marca}}
-                        </div>
-                        <div class="card-body pt-0">
-                            <div class="row">
-                                <div class="col-7">
-                                    <h2 class="lead"><b>{{producto.nombre_producto}}</b></h2>
-                                    <p class="text-muted text-sm"><b>Descripcion:
-                                        </b>{{producto.descripcion_producto[0:150]}} ...
-                                    </p>
-                                    <ul class="ml-4 mb-0 fa-ul text-muted">
-                                        <li class="small"><span class="fa-li"><i
-                                                    class="fas fa-lg fa-building"></i></span> SKU: {{producto.sku}}</li>
-                                        <br>
-                                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span>
-                                            Precio : S/{{producto.precio_producto}}</li>
-                                    </ul>
-                                </div>
-                                <div class="col-5 text-center">
-                                    <img src="{{producto.foto_producto}}" alt="user-avatar" class="   img-fluid">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <div class="text-right">
-                                <a href="#" class="btn btn-sm bg-teal">
-                                    <i class="fas fa-comments"></i> Ver Detalle
-                                </a>
-                                <a href="#" class="btn btn-sm btn-primary">
-                                    <i class="fas fa-user"></i> Editar Producto
-                                </a>
-                            </div>
-                        </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Listado de Ordenes</h3>
                     </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Id de Usuario</th>
+                                    <th>Username</th>
+                                    <th>Tipo de Usuario</th>
+                                    <th>Nombre de Usuario</th>
+                                    <th>Foto de Usuario</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {%for user in data['usuarios']%}
+                                <tr>
+                                    <td>{{user.id_usuario}}</td>
+                                    <td>{{user.username}}</td>
+                                    <td>{{user.tipo_usuario}}</td>
+                                    <td>{{user.nombre_usuario}}</td>
+                                    <td class="foto_usuario_tabla"><img src="{{user.foto_usuario}}" alt=""></td>
+                                </tr>
+                                {%endfor%}
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
                 </div>
-                {%endfor%}
+                <!-- /.card -->
             </div>
+            <!-- /.col -->
         </div>
-        <!-- /.card-body -->
-        <div class="card-footer">
-            <nav aria-label="Contacts Page Navigation">
-                <ul class="pagination justify-content-center m-0">
-                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">4</a></li>
-                    <li class="page-item"><a class="page-link" href="#">5</a></li>
-                    <li class="page-item"><a class="page-link" href="#">6</a></li>
-                    <li class="page-item"><a class="page-link" href="#">7</a></li>
-                    <li class="page-item"><a class="page-link" href="#">8</a></li>
-                </ul>
-            </nav>
-        </div>
-        <!-- /.card-footer -->
+        <!-- /.row -->
     </div>
-    <!-- /.card -->
-
+    <!-- /.container-fluid -->
 </section>
+<!-- /.content -->
 
 {%endblock%}
 
@@ -219,7 +196,7 @@
             "searching": true,
             "ordering": true,
             "info": true,
-            "autoWidth": true,
+            "autoWidth": false,
             "responsive": true,
         });
     });

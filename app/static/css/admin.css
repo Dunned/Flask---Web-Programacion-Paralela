@@ -26,3 +26,14 @@
 .logomalmo {
   color: var(--color_principal);
 }
+
+.foto_usuario_tabla {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.foto_usuario_tabla img {
+  height: 60px;
+  max-width: 100%;
+}

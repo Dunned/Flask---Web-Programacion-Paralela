@@ -48,13 +48,13 @@ INDICADORES PRINCIPALES MALMO
           </a>
         </li>
         <li class="nav-item">
-          <a href="pages/tables/data.html" class="nav-link">
+          <a href="#" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
             <p>Registrar Productos</p>
           </a>
         </li>
         <li class="nav-item">
-          <a href="pages/tables/jsgrid.html" class="nav-link">
+          <a href="#" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
             <p>Editar Productos</p>
           </a>
@@ -72,19 +72,19 @@ INDICADORES PRINCIPALES MALMO
       </a>
       <ul class="nav nav-treeview">
         <li class="nav-item">
-          <a href="pages/tables/simple.html" class="nav-link">
+          <a href="{{url_for('clientes')}}" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
             <p>Ver Clientes</p>
           </a>
         </li>
         <li class="nav-item">
-          <a href="pages/tables/data.html" class="nav-link">
+          <a href="#" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
             <p>Editar Clientes</p>
           </a>
         </li>
         <li class="nav-item">
-          <a href="pages/tables/jsgrid.html" class="nav-link">
+          <a href="#" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
             <p>Eliminar Clientes</p>
           </a>
@@ -188,21 +188,20 @@ INDICADORES PRINCIPALES MALMO
         <div class="card">
           <div class="card-header border-0">
             <div class="d-flex justify-content-between">
-              <h3 class="card-title">Online Store Visitors</h3>
-              <a href="javascript:void(0);">View Report</a>
+              <h3 class="card-title">Visitantes de MALMO</h3>
             </div>
           </div>
           <div class="card-body">
             <div class="d-flex">
               <p class="d-flex flex-column">
                 <span class="text-bold text-lg">820</span>
-                <span>Visitors Over Time</span>
+                <span>Historico de Visitantes</span>
               </p>
               <p class="ml-auto d-flex flex-column text-right">
                 <span class="text-success">
                   <i class="fas fa-arrow-up"></i> 12.5%
                 </span>
-                <span class="text-muted">Since last week</span>
+                <span class="text-muted">Vs Semana Pasada</span>
               </p>
             </div>
             <!-- /.d-flex -->
@@ -213,101 +212,83 @@ INDICADORES PRINCIPALES MALMO
 
             <div class="d-flex flex-row justify-content-end">
               <span class="mr-2">
-                <i class="fas fa-square text-primary"></i> This Week
+                <i class="fas fa-square text-primary"></i> Semana Actual
               </span>
 
               <span>
-                <i class="fas fa-square text-gray"></i> Last Week
+                <i class="fas fa-square text-gray"></i> Semana Pasada
               </span>
             </div>
           </div>
         </div>
         <!-- /.card -->
-
         <div class="card">
           <div class="card-header border-0">
-            <h3 class="card-title">Products</h3>
-            <div class="card-tools">
-              <a href="#" class="btn btn-tool btn-sm">
-                <i class="fas fa-download"></i>
-              </a>
-              <a href="#" class="btn btn-tool btn-sm">
-                <i class="fas fa-bars"></i>
-              </a>
-            </div>
+            <h3 class="card-title">Productos mas Vendidos</h3>
           </div>
           <div class="card-body table-responsive p-0">
             <table class="table table-striped table-valign-middle">
               <thead>
                 <tr>
-                  <th>Product</th>
-                  <th>Price</th>
-                  <th>Sales</th>
-                  <th>More</th>
+                  <th>Productos</th>
+                  <th>Precio Unitario</th>
+                  <th>Ventas</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td>
-                    <img src="dist/img/default-150x150.png" alt="Product 1" class="img-circle img-size-32 mr-2">
-                    Some Product
+                    <img
+                      src="https://tiendasishop.com/media/catalog/product/m/g/mgj83lz_a_1.jpg?optimize=high&bg-color=255,255,255&fit=bounds&height=700&width=700&canvas=700:700"
+                      alt="Product 1" class="img-circle img-size-32 mr-2">
+                    Iphone 13 Pro Max
                   </td>
-                  <td>$13 USD</td>
+                  <td>$1099 USD</td>
                   <td>
                     <small class="text-success mr-1">
                       <i class="fas fa-arrow-up"></i>
                       12%
                     </small>
-                    12,000 Sold
-                  </td>
-                  <td>
-                    <a href="#" class="text-muted">
-                      <i class="fas fa-search"></i>
-                    </a>
+                    12,000 Unidades
                   </td>
                 </tr>
                 <tr>
                   <td>
-                    <img src="dist/img/default-150x150.png" alt="Product 1" class="img-circle img-size-32 mr-2">
-                    Another Product
+                    <img
+                      src="https://5gmobilephone.net/wp-content/uploads/2021/03/Samsung-Galaxy-S21-Ultra-5G-460x460.jpg"
+                      alt="Product 1" class="img-circle img-size-32 mr-2">
+                    Galaxy S22 Ultra
                   </td>
-                  <td>$29 USD</td>
+                  <td>$999 USD</td>
                   <td>
                     <small class="text-warning mr-1">
                       <i class="fas fa-arrow-down"></i>
                       0.5%
                     </small>
-                    123,234 Sold
-                  </td>
-                  <td>
-                    <a href="#" class="text-muted">
-                      <i class="fas fa-search"></i>
-                    </a>
+                    123,234 Unidades
                   </td>
                 </tr>
                 <tr>
                   <td>
-                    <img src="dist/img/default-150x150.png" alt="Product 1" class="img-circle img-size-32 mr-2">
-                    Amazing Product
+                    <img src="https://pe.celulares.com/fotos/xiaomi-redmi-note-11-4g-93323-g-alt.jpg" alt="Product 1"
+                      class="img-circle img-size-32 mr-2">
+                    Xiaomi Redmi 10
                   </td>
-                  <td>$1,230 USD</td>
+                  <td>$123 USD</td>
                   <td>
                     <small class="text-danger mr-1">
                       <i class="fas fa-arrow-down"></i>
                       3%
                     </small>
-                    198 Sold
+                    - 198 Unidades
                   </td>
-                  <td>
-                    <a href="#" class="text-muted">
-                      <i class="fas fa-search"></i>
-                    </a>
-                  </td>
+
                 </tr>
                 <tr>
                   <td>
-                    <img src="dist/img/default-150x150.png" alt="Product 1" class="img-circle img-size-32 mr-2">
-                    Perfect Item
+                    <img src="https://pe.celulares.com/fotos/sony-xperia-xa1-46671-g-alt.jpg" alt="Product 1"
+                      class="img-circle img-size-32 mr-2">
+                    Sony XA1
                     <span class="badge bg-danger">NEW</span>
                   </td>
                   <td>$199 USD</td>
@@ -317,11 +298,6 @@ INDICADORES PRINCIPALES MALMO
                       63%
                     </small>
                     87 Sold
-                  </td>
-                  <td>
-                    <a href="#" class="text-muted">
-                      <i class="fas fa-search"></i>
-                    </a>
                   </td>
                 </tr>
               </tbody>
@@ -335,21 +311,20 @@ INDICADORES PRINCIPALES MALMO
         <div class="card">
           <div class="card-header border-0">
             <div class="d-flex justify-content-between">
-              <h3 class="card-title">Sales</h3>
-              <a href="javascript:void(0);">View Report</a>
+              <h3 class="card-title">Ventas Brutas</h3>
             </div>
           </div>
           <div class="card-body">
             <div class="d-flex">
               <p class="d-flex flex-column">
                 <span class="text-bold text-lg">$18,230.00</span>
-                <span>Sales Over Time</span>
+                <span>Ventas Totales</span>
               </p>
               <p class="ml-auto d-flex flex-column text-right">
                 <span class="text-success">
                   <i class="fas fa-arrow-up"></i> 33.1%
                 </span>
-                <span class="text-muted">Since last month</span>
+                <span class="text-muted">Desde el mes Pasado</span>
               </p>
             </div>
             <!-- /.d-flex -->
@@ -360,11 +335,11 @@ INDICADORES PRINCIPALES MALMO
 
             <div class="d-flex flex-row justify-content-end">
               <span class="mr-2">
-                <i class="fas fa-square text-primary"></i> This year
+                <i class="fas fa-square text-primary"></i> Año Actual
               </span>
 
               <span>
-                <i class="fas fa-square text-gray"></i> Last year
+                <i class="fas fa-square text-gray"></i> Año Pasado
               </span>
             </div>
           </div>

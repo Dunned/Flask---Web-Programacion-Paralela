@@ -32,6 +32,25 @@ class ModeloUsuario():
             cursor.close()
 
     @classmethod
+    def obtenerUsuarios(self, conexion):
+        try:
+            cursor = conexion.cursor()
+            sql = f"""SELECT id_usuario,username,nombre_usuario,nombre_tipo_usuario,foto_usuario FROM usuario
+            left join tipo_usuario ON usuario.tipo_usuario = tipo_usuario.id_tipo_usuario"""
+            cursor.execute(sql)
+            registros = cursor.fetchall()
+            usuarios = []
+            for row in registros:
+                user = Usuario(row[0], row[1], None, row[3], row[2], row[4])
+                usuarios.append(user)
+            return usuarios
+        except Exception as ex:
+            raise Exception(ex)
+        finally:
+            conexion.close()
+            cursor.close()
+
+    @classmethod
     def obtener_por_id(self, conexion, id):
         try:
             cursor = conexion.cursor()

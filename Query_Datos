@@ -1,0 +1,45 @@
+SELECT * FROM public.orden order by 2 desc
+SELECT * FROM producto
+
+Select p.sku,p.nombre_producto,p.descripcion_producto ,p.costo_producto 
+            ,p.precio_producto, p.foto_producto,m.id_marca ,m.nombre_marca ,m.descripcion_marca  
+            from producto as p left join marcas as m  ON p.id_marca =m.id_marca
+INSERT INTO producto
+VALUES 
+('153155','Galaxy A53 5G','El celular Samsung Galaxy A53 5G es quizá una de las grandes innovaciones de la marca en lo que respecta a la serie A5X dado que es un dispositivo que mantiene las mejores características de sus predecesores en cuanto a procesador y batería; y, al mismo tiempo, incorpora nuevas características como su envidiable lente posterior de 64 mpx y sistema de altavoces',
+2500,3200,2,'https://pe.celulares.com/fotos/samsung-galaxy-a53-93566-g-alt.jpeg')
+
+DELETE FROM producto where sku = '153155'
+SELECT * FROM public.marcas
+INSERT INTO marcas(nombre_marca,descripcion_marca)
+VALUES 
+('Sony','Marca Japonesa'),
+('HTC','Marca Taiwan'),
+('Google','Marca Norteameticana'),
+('Oppo','Marca China')
+
+DELETE FROM orden
+SELECT * FROM public.tipo_usuario
+
+SELECT * FROM public.usuario
+/*
+INSERT INTO usuario(username,tipo_usuario,nombre_usuario)
+VALUES 
+('cliente2',2,'Alexis Sanchez'), 5
+('cliente3',2,'Pedro Aquino'), 6
+('cliente4',2,'Roberto Carlos'), 7
+('cliente5',2,'Paolo Guerrero'), 8
+('cliente6',2,'Cristiano Ronaldo'), 9
+('cliente7',2,'Pedro Castillo'), 10
+('cliente8',2,'Kenji Fujimori')*/ 11
+
+INSERT INTO orden(tipo_delivery,id_usuario,ticket_full_price,descuento_aplicado)
+VALUES
+('Express',5,'5000','0'),
+('Programado',6,'4000','0'),
+('Programado',7,'1504','0'),
+('Programado',8,'2501','0'),
+('Programado',9,'1253','0'),
+('Express',10,'500','0'),
+('Express',5,'400','0'),
+('Express',7,'1327','0')
