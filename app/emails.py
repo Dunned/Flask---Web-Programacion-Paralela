@@ -1,6 +1,7 @@
 from threading import Thread
 from flask_mail import Message
 from flask import current_app, render_template
+from decouple import config
 
 
 def confirmacion_email(app, mail, usuario=None, producto=None):
@@ -16,7 +17,7 @@ def confirmacion_email(app, mail, usuario=None, producto=None):
 def envio_email_async(app, mail):
     with app.app_context():
         mensaje = Message('Confirmacion de Orden', sender=current_app.config['MAIL_USERNAME'],
-                          recipients=['eduardojaureguir@gmail.com'])
+                          recipients=[config('MAIL_DESTINO')])
         mensaje.html = render_template(
             'emails/confirmacion_edicion.html'
         )

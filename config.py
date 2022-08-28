@@ -1,9 +1,8 @@
-import imp
 from decouple import config
 
 
 class Config:
-    SECRET_KEY = 'programacion_paralela2022'
+    SECRET_KEY = config('SECRET_KEY')
 
 
 class DevelopmentConfig(Config):
@@ -11,9 +10,9 @@ class DevelopmentConfig(Config):
     MAIL_SERVER = 'smtp.gmail.com'
     MAIL_PORT = 587  # TLS
     MAIL_USE_TLS = True
-    MAIL_USERNAME = 'pruebaparalela2022@gmail.com'
+    MAIL_USERNAME = config('MAIL_USERNAME')
     #MAIL_PASSWORD = 'progra123'
-    MAIL_PASSWORD = 'ptmbauixzvptsamv'
+    MAIL_PASSWORD = config('MAIL_PASSWORD')
 
 
 config = {

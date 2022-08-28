@@ -6,6 +6,7 @@ from flask_wtf.csrf import CSRFProtect
 import psycopg2 as bd
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from flask_mail import Mail
+from decouple import config
 
 # SOCKET IO
 from flask_socketio import SocketIO, send
@@ -21,8 +22,8 @@ from .models.entities.Usuario import Usuario
 
 
 def obtener_conexion():
-    conexion = bd.connect(user='postgres', password='eduardojr',
-                          database='bd_malmo')
+    conexion = bd.connect(user=config('BD_USERNAME'), password=config('BD_PASSWORD'),
+                          database=config('DATABASE_NAME'))
     return conexion
 
 
@@ -121,19 +122,6 @@ def clientes():
             'usuarios': usuarios
         }
         return render_template('pages/clientes.html', data=data)
-    except Exception as e:
-        print(e)
-
-
-@app.route('/editar')
-@login_required
-def editar():
-    try:
-        data = {
-            'Titulo': 'Editar Producto',
-            'productos': None
-        }
-        return render_template('editar.html', data=data)
     except Exception as e:
         print(e)
 
