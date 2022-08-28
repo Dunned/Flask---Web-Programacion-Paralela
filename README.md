@@ -7,16 +7,17 @@
 - Envio de reportes a email de manera asincrona
 - Chat Interno para intercambio de mensajes de sesiones
 
-##Vista General
+## Vista General
 <img width="753" alt="image" src="https://user-images.githubusercontent.com/73073375/187055020-80ec6644-e0f1-4d88-ab6f-9991e00918b6.png">
 
-##Dashboard General
+## Dashboard General
 <img width="749" alt="image" src="https://user-images.githubusercontent.com/73073375/187055033-723d6de7-aa1b-4232-a569-4d81c817c097.png">
 
-
+## Listado y Control de Productos
 <img width="747" alt="image" src="https://user-images.githubusercontent.com/73073375/187055046-96fb0ab7-fa5e-4fcd-894a-ce7c029abc79.png">
 
+## Chat Vision General
 <img width="749" alt="image" src="https://user-images.githubusercontent.com/73073375/187055098-80d5921c-c071-48f2-b902-eb47b20433fb.png">
 
-
+## Intercambio de Mensajes
 <img width="739" alt="image" src="https://user-images.githubusercontent.com/73073375/187055091-9873bd7b-eef7-4b88-8f88-88ec133e88f4.png">
